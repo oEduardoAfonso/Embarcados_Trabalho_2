@@ -12,7 +12,7 @@ EXE = bin/bin
 all: clean $(EXE)
 
 $(EXE): $(OBJ)
-	$(CC) $(LDFLAGS) $(OBJDIR)/*.o -o $@
+	$(CC) $(INCDIR)/*.c $(LDFLAGS) $(OBJDIR)/*.o -o $@
 
 $(OBJDIR)/%.o : $(SRCDIR)/%.c
 	@mkdir -p $(@D)
