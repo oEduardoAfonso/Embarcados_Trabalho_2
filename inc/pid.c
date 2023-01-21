@@ -3,9 +3,9 @@
 
 double saida_medida, sinal_de_controle;
 double referencia = 0.0;
-double Kp = 0.0;  // Ganho Proporcional
-double Ki = 0.0;  // Ganho Integral
-double Kd = 0.0;  // Ganho Derivativo
+double Kp = 30.0;  // Ganho Proporcional
+double Ki = 0.2;  // Ganho Integral
+double Kd = 400.0;  // Ganho Derivativo
 int T = 1.0;      // Período de Amostragem (ms)
 unsigned long last_time;
 double erro_total, erro_anterior = 0.0;
@@ -28,11 +28,11 @@ double pid_controle(double saida_medida){
 
     erro_total += erro; // Acumula o erro (Termo Integral)
 
-    if (erro_total >= sinal_de_controle_MAX) 
+    if (erro_total >= sinal_de_controle_MAX)
     {
         erro_total = sinal_de_controle_MAX;
     }
-    else if (erro_total <= sinal_de_controle_MIN) 
+    else if (erro_total <= sinal_de_controle_MIN)
     {
         erro_total = sinal_de_controle_MIN;
     }
@@ -41,11 +41,11 @@ double pid_controle(double saida_medida){
 
     sinal_de_controle = Kp*erro + (Ki*T)*erro_total + (Kd/T)*delta_error; // PID calcula sinal de controle
 
-    if (sinal_de_controle >= sinal_de_controle_MAX) 
+    if (sinal_de_controle >= sinal_de_controle_MAX)
     {
         sinal_de_controle = sinal_de_controle_MAX;
     }
-    else if (sinal_de_controle <= sinal_de_controle_MIN) 
+    else if (sinal_de_controle <= sinal_de_controle_MIN)
     {
         sinal_de_controle = sinal_de_controle_MIN;
     }
