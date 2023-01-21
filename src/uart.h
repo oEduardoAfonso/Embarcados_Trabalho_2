@@ -1,0 +1,1 @@
+int useUart(char command);
