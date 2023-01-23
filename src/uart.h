@@ -1,1 +1,1 @@
-int useUart(char command);
+float useUart(char command, float arg);

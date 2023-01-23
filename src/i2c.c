@@ -146,12 +146,6 @@ float init_i2c(char *path)
         return -1;
     }
 
-    if (ioctl(id.fd, I2C_SLAVE, id.dev_addr) < 0)
-    {
-        fprintf(stderr, "Failed to acquire bus access and/or talk to slave.\n");
-        return -1;
-    }
-
     /* Make sure to select BME280_I2C_ADDR_PRIM or BME280_I2C_ADDR_SEC as needed */
     id.dev_addr = BME280_I2C_ADDR_PRIM;
 

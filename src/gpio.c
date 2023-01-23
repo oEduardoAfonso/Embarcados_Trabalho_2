@@ -7,7 +7,7 @@
 #define PIN_RES 4
 #define PIN_FAN 5
 
-void gpio_init()
+void gpio_init(double Kp_, double Ki_, double Kd_)
 {
     wiringPiSetup();
 
@@ -16,6 +16,8 @@ void gpio_init()
 
     softPwmCreate(PIN_RES, 0, 100);
     softPwmCreate(PIN_FAN, 0, 100);
+
+    pid_configura_constantes(Kp_, Ki_, Kd_);
 }
 
 void set_pwm_value(int pwm_value)
@@ -39,10 +41,12 @@ void set_pwm_value(int pwm_value)
     }
 }
 
-void control_pwm(float temp_interna, float temp_referencia)
+int control_pwm(float temp_interna, float temp_referencia)
 {
     pid_atualiza_referencia(temp_referencia);
     int pwm_value = (int)pid_controle(temp_interna);
     printf("int: %f, ref: %f, pwm: %d\n", temp_interna, temp_referencia, pwm_value);
     set_pwm_value(pwm_value);
+
+    return pwm_value;
 }

@@ -1,3 +1,5 @@
-void gpio_init();
+void gpio_init(double Kp_, double Ki_, double Kd_);
 
-void control_pwm(float temp_interna, float temp_referencia);
+int control_pwm(float temp_interna, float temp_referencia);
+
+void set_pwm_value(int pwm_value);
